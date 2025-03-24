@@ -33,7 +33,16 @@ export class AppComponent {
   deleteName = '';
   deleteMessage = '';
 
+  errorMessage: string | null = null;
+
   constructor(private playlistService: PlaylistService) {}
+
+  showError(message: string): void {
+    this.errorMessage = message;
+    setTimeout(() => {
+      this.errorMessage = null; 
+    }, 5000);
+  }
 
   addSong(): void {
     this.playlist.songs.push({ ...this.newSong });
@@ -55,7 +64,8 @@ export class AppComponent {
       next: (data) => {
         this.playlists = data;
       },
-      error: (err) => console.error('Error fetching playlists', err)
+      error: (err) =>{this.showError('Error cargando playlists'); 
+      },
     });
   }
 

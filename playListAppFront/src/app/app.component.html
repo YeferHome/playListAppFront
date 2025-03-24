@@ -1,110 +1,121 @@
 <div class="container mt-4">
-  <h1 class="mb-4 text-center">Quipux App</h1>
-  <div class="d-flex justify-content-center mb-4">
-    <button class="btn btn-primary me-2" (click)="mode = 'create'">Crear Playlist</button>
-    <button class="btn btn-success me-2" (click)="mode = 'list'">Ver Todas</button>
-    <button class="btn btn-info me-2 text-white" (click)="mode = 'search'">Buscar por Nombre</button>
-    <button class="btn btn-danger" (click)="mode = 'delete'">Eliminar por Nombre</button>
+  <!-- Contenedor del título con fondo -->
+  <div class="title-container bg-primary text-white p-4 mb-4 rounded">
+    <h1 class="text-center display-4 fw-bold">Quipux App</h1>
+    <p class="text-center lead">Gestiona tus playlists de manera fácil y rápida</p>
   </div>
 
-    <!-- Sección: Crear Playlist -->
-    <div *ngIf="mode === 'create'" class="card p-3 mb-3">
-      <h2>Crear Playlist</h2>
-      <form (ngSubmit)="savePlaylist()">
-        <div class="mb-3">
-          <label for="playlistName" class="form-label">Nombre de la Playlist</label>
-          <input type="text" class="form-control" id="playlistName" [(ngModel)]="playlist.name" name="playlistName" required>
-        </div>
-        <div class="mb-3">
-          <label for="playlistDescription" class="form-label">Descripción</label>
-          <textarea class="form-control" id="playlistDescription" [(ngModel)]="playlist.description" name="playlistDescription"></textarea>
-        </div>
-  
-        <h3>Añadir Canciones</h3>
-        <div class="mb-3">
-          <label for="songTitle" class="form-label">Título</label>
-          <input type="text" class="form-control" id="songTitle" [(ngModel)]="newSong.titulo" name="songTitle" required>
-        </div>
-        <div class="mb-3">
-          <label for="songArtist" class="form-label">Artista</label>
-          <input type="text" class="form-control" id="songArtist" [(ngModel)]="newSong.artista" name="songArtist" required>
-        </div>
-        <div class="mb-3">
-          <label for="songAlbum" class="form-label">Álbum</label>
-          <input type="text" class="form-control" id="songAlbum" [(ngModel)]="newSong.album" name="songAlbum">
-        </div>
-        <div class="mb-3">
-          <label for="songYear" class="form-label">Año</label>
-          <input type="text" class="form-control" id="songYear" [(ngModel)]="newSong.anno" name="songYear">
-        </div>
-        <div class="mb-3">
-          <label for="songGenre" class="form-label">Género</label>
-          <input type="text" class="form-control" id="songGenre" [(ngModel)]="newSong.genero" name="songGenre">
-        </div>
-        <button type="button" class="btn btn-secondary" (click)="addSong()">Añadir Canción</button>
-  
-        <h3 class="mt-3">Canciones Añadidas</h3>
-        <ul>
-          <li *ngFor="let song of playlist.songs">
+  <!-- Mensaje de error -->
+  <div *ngIf="errorMessage" class="alert alert-danger position-fixed top-0 end-0 m-3 fade show" role="alert">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Botones de navegación -->
+  <div class="d-flex justify-content-center mb-4">
+    <button class="btn btn-primary me-2" (click)="mode = 'create'">Crear Playlist</button>
+    <button class="btn btn-success me-2" (click)="mode = 'list'">listar playList</button>
+    <button class="btn btn-info me-2 text-white" (click)="mode = 'search'">Buscar</button>
+    <button class="btn btn-danger" (click)="mode = 'delete'">Eliminar</button>
+  </div>
+
+  <!-- Sección: Crear Playlist -->
+  <div *ngIf="mode === 'create'" class="card p-3 mb-3 shadow">
+    <h2 class="card-title">Crear Playlist</h2>
+    <form (ngSubmit)="savePlaylist()">
+      <div class="mb-3">
+        <label for="playlistName" class="form-label">Nombre de la Playlist</label>
+        <input type="text" class="form-control" id="playlistName" [(ngModel)]="playlist.name" name="playlistName" required>
+      </div>
+      <div class="mb-3">
+        <label for="playlistDescription" class="form-label">Descripción</label>
+        <textarea class="form-control" id="playlistDescription" [(ngModel)]="playlist.description" name="playlistDescription"></textarea>
+      </div>
+
+      <h3>Añadir Canciones</h3>
+      <div class="mb-3">
+        <label for="songTitle" class="form-label">Título</label>
+        <input type="text" class="form-control" id="songTitle" [(ngModel)]="newSong.titulo" name="songTitle" required>
+      </div>
+      <div class="mb-3">
+        <label for="songArtist" class="form-label">Artista</label>
+        <input type="text" class="form-control" id="songArtist" [(ngModel)]="newSong.artista" name="songArtist" required>
+      </div>
+      <div class="mb-3">
+        <label for="songAlbum" class="form-label">Álbum</label>
+        <input type="text" class="form-control" id="songAlbum" [(ngModel)]="newSong.album" name="songAlbum">
+      </div>
+      <div class="mb-3">
+        <label for="songYear" class="form-label">Año</label>
+        <input type="text" class="form-control" id="songYear" [(ngModel)]="newSong.anno" name="songYear">
+      </div>
+      <div class="mb-3">
+        <label for="songGenre" class="form-label">Género</label>
+        <input type="text" class="form-control" id="songGenre" [(ngModel)]="newSong.genero" name="songGenre">
+      </div>
+      <button type="button" class="btn btn-secondary" (click)="addSong()">Añadir Canción</button>
+
+      <h3 class="mt-3">Canciones Añadidas</h3>
+      <ul class="list-group">
+        <li *ngFor="let song of playlist.songs" class="list-group-item">
+          {{ song.titulo }} - {{ song.artista }}
+        </li>
+      </ul>
+
+      <button type="submit" class="btn btn-primary mt-3">Guardar Playlist</button>
+    </form>
+  </div>
+
+  <!-- Sección: Ver Todas -->
+  <div *ngIf="mode === 'list'" class="card p-3 mb-3 shadow">
+    <h2 class="card-title">Lista de Playlists</h2>
+    <button class="btn btn-primary mb-3" (click)="loadPlaylists()">Cargar Playlists</button>
+    <ul class="list-group">
+      <li *ngFor="let playlist of playlists" class="list-group-item">
+        <strong>{{ playlist.name }}</strong> - {{ playlist.description }}
+        <ul class="list-group mt-2">
+          <li *ngFor="let song of playlist.songs" class="list-group-item">
             {{ song.titulo }} - {{ song.artista }}
           </li>
         </ul>
-  
-        <button type="submit" class="btn btn-primary mt-3">Guardar Playlist</button>
-      </form>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Sección: Buscar -->
+  <div *ngIf="mode === 'search'" class="card p-3 mb-3 shadow">
+    <h2 class="card-title">Buscar Playlist por Nombre</h2>
+    <div class="mb-3">
+      <label for="searchName" class="form-label">Nombre de la Playlist</label>
+      <input type="text" class="form-control" id="searchName" [(ngModel)]="searchName" name="searchName" required>
     </div>
-  
-    <!-- Sección: Ver Todas -->
-    <div *ngIf="mode === 'list'" class="card p-3 mb-3">
-      <h2>Lista de Playlists</h2>
-      <button class="btn btn-primary mb-3" (click)="loadPlaylists()">Cargar Playlists</button>
-      <ul>
-        <li *ngFor="let playlist of playlists">
-          <strong>{{ playlist.name }}</strong> - {{ playlist.description }}
-          <ul>
-            <li *ngFor="let song of playlist.songs">
-              {{ song.titulo }} - {{ song.artista }}
-            </li>
-          </ul>
+    <button class="btn btn-primary" (click)="searchPlaylist()">Buscar</button>
+
+    <div *ngIf="searchResult" class="mt-3">
+      <h3>Resultado:</h3>
+      <p><strong>{{ searchResult.name }}</strong> - {{ searchResult.description }}</p>
+      <ul class="list-group">
+        <li *ngFor="let song of searchResult.songs" class="list-group-item">
+          {{ song.titulo }} - {{ song.artista }}
         </li>
       </ul>
     </div>
-  
-    <!-- Sección: Buscar -->
-    <div *ngIf="mode === 'search'" class="card p-3 mb-3">
-      <h2>Buscar Playlist por Nombre</h2>
-      <div class="mb-3">
-        <label for="searchName" class="form-label">Nombre de la Playlist</label>
-        <input type="text" class="form-control" id="searchName" [(ngModel)]="searchName" name="searchName" required>
-      </div>
-      <button class="btn btn-primary" (click)="searchPlaylist()">Buscar</button>
-  
-      <div *ngIf="searchResult" class="mt-3">
-        <h3>Resultado:</h3>
-        <p><strong>{{ searchResult.name }}</strong> - {{ searchResult.description }}</p>
-        <ul>
-          <li *ngFor="let song of searchResult.songs">
-            {{ song.titulo }} - {{ song.artista }}
-          </li>
-        </ul>
-      </div>
-  
-      <div *ngIf="searchError" class="mt-3 text-danger">
-        {{ searchError }}
-      </div>
-    </div>
-  
-    <!-- Sección: Eliminar -->
-    <div *ngIf="mode === 'delete'" class="card p-3 mb-3">
-      <h2>Eliminar Playlist por Nombre</h2>
-      <div class="mb-3">
-        <label for="deleteName" class="form-label">Nombre de la Playlist</label>
-        <input type="text" class="form-control" id="deleteName" [(ngModel)]="deleteName" name="deleteName" required>
-      </div>
-      <button class="btn btn-danger" (click)="deletePlaylist()">Eliminar</button>
-  
-      <div *ngIf="deleteMessage" class="mt-3">
-        {{ deleteMessage }}
-      </div>
+
+    <div *ngIf="searchError" class="mt-3 text-danger">
+      {{ searchError }}
     </div>
   </div>
+
+  <!-- Sección: Eliminar -->
+  <div *ngIf="mode === 'delete'" class="card p-3 mb-3 shadow">
+    <h2 class="card-title">Eliminar Playlist por Nombre</h2>
+    <div class="mb-3">
+      <label for="deleteName" class="form-label">Nombre de la Playlist</label>
+      <input type="text" class="form-control" id="deleteName" [(ngModel)]="deleteName" name="deleteName" required>
+    </div>
+    <button class="btn btn-danger" (click)="deletePlaylist()">Eliminar</button>
+
+    <div *ngIf="deleteMessage" class="mt-3">
+      {{ deleteMessage }}
+    </div>
+  </div>
+</div>

@@ -1,6 +1,35 @@
-.container {
-    max-width: 800px;
-  }
-  
-  /* Otros estilos */
-  
+/* Estilo para el contenedor del título */
+.title-container {
+  background: linear-gradient(135deg, #007bff, #0056b3); /* Fondo degradado */
+  color: white; /* Texto blanco */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra */
+}
+
+/* Estilo para las tarjetas */
+.card {
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra */
+}
+
+/* Estilo para los botones */
+.btn {
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+
+/* Animación para el mensaje de error */
+.fade {
+  transition: opacity 1s ease-in-out;
+}
+
+.fade.show {
+  opacity: 1;
+}
+
+.fade:not(.show) {
+  opacity: 0;
+}
