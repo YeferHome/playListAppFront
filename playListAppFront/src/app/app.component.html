@@ -1,16 +1,11 @@
 <div class="container mt-4">
-  <!-- Contenedor del título con fondo -->
   <div class="title-container bg-primary text-white p-4 mb-4 rounded">
     <h1 class="text-center display-4 fw-bold">Quipux App</h1>
     <p class="text-center lead">Gestiona tus playlists de manera fácil y rápida</p>
   </div>
-
-  <!-- Mensaje de error -->
   <div *ngIf="errorMessage" class="alert alert-danger position-fixed top-0 end-0 m-3 fade show" role="alert">
     {{ errorMessage }}
   </div>
-
-  <!-- Botones de navegación -->
   <div class="d-flex justify-content-center mb-4">
     <button class="btn btn-primary me-2" (click)="mode = 'create'">Crear Playlist</button>
     <button class="btn btn-success me-2" (click)="mode = 'list'">listar playList</button>

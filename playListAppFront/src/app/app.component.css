@@ -1,17 +1,17 @@
 /* Estilo para el contenedor del título */
 .title-container {
-  background: linear-gradient(135deg, #007bff, #0056b3); /* Fondo degradado */
-  color: white; /* Texto blanco */
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  color: white; 
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 /* Estilo para las tarjetas */
 .card {
   border: none;
   border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
 }
 
 /* Estilo para los botones */
